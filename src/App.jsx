@@ -1,10 +1,9 @@
-import logo from './logo.svg'
 import './App.css'
 import { useState } from 'react'
 
 function App() {
   const [colorToggle, setColorToggle] = useState('red')
-  const [checkbox, setCheckbox] = useState(false)
+  const [isCheckbox, setIsCheckbox] = useState(false)
   const newButtonColor = colorToggle === 'red' ? 'blue' : 'red'
 
   const handleChangeColor = () => {
@@ -12,17 +11,22 @@ function App() {
   }
 
   const handleChangeCheckbox = () => {
-    setCheckbox((prev) => !prev)
+    setIsCheckbox((prev) => !prev)
   }
   return (
     <div>
       <button
         onClick={handleChangeColor}
         style={{ backgroundColor: `${colorToggle}` }}
+        disabled={isCheckbox}
       >
         Change to {newButtonColor}
       </button>
-      <input type="checkbox" value={checkbox} onChange={handleChangeCheckbox} />
+      <input
+        type="checkbox"
+        value={isCheckbox}
+        onChange={handleChangeCheckbox}
+      />
     </div>
   )
 }
