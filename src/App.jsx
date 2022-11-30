@@ -17,7 +17,7 @@ function App() {
     <div>
       <button
         onClick={handleChangeColor}
-        style={{ backgroundColor: `${colorToggle}` }}
+        style={{ backgroundColor: `${isCheckbox ? 'gray' : colorToggle}` }}
         disabled={isCheckbox}
       >
         Change to {newButtonColor}
