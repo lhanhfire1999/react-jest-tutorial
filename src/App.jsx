@@ -23,10 +23,13 @@ function App() {
         Change to {newButtonColor}
       </button>
       <input
+        id="disabled-button-checkbox"
         type="checkbox"
         value={isCheckbox}
         onChange={handleChangeCheckbox}
       />
+
+      <label htmlFor="disabled-button-checkbox">Disabled button</label>
     </div>
   )
 }
