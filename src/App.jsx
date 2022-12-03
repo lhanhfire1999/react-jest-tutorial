@@ -6,12 +6,15 @@ export const handleReplaceCamelCaseWithSpace = (colorName) => {
 }
 
 function App() {
-  const [colorToggle, setColorToggle] = useState('red')
+  const [colorToggle, setColorToggle] = useState('MediumVioletRed')
   const [isCheckbox, setIsCheckbox] = useState(false)
-  const newButtonColor = colorToggle === 'red' ? 'blue' : 'red'
+  const newButtonColor =
+    colorToggle === 'MediumVioletRed' ? 'MidnightBlue' : 'MediumVioletRed'
 
   const handleChangeColor = () => {
-    setColorToggle((prev) => (prev === 'red' ? 'blue' : 'red'))
+    setColorToggle((prev) =>
+      prev === 'MediumVioletRed' ? 'MidnightBlue' : 'MediumVioletRed'
+    )
   }
 
   const handleChangeCheckbox = () => {
@@ -24,7 +27,7 @@ function App() {
         style={{ backgroundColor: `${isCheckbox ? 'gray' : colorToggle}` }}
         disabled={isCheckbox}
       >
-        Change to {newButtonColor}
+        Change to {handleReplaceCamelCaseWithSpace(newButtonColor)}
       </button>
       <input
         id="disabled-button-checkbox"
