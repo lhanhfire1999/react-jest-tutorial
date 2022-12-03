@@ -1,6 +1,10 @@
 import './App.css'
 import { useState } from 'react'
 
+export const handleReplaceCamelCaseWithSpace = (colorName) => {
+  return colorName.replace(/\B([A-Z])\B/g, ' $1')
+}
+
 function App() {
   const [colorToggle, setColorToggle] = useState('red')
   const [isCheckbox, setIsCheckbox] = useState(false)
