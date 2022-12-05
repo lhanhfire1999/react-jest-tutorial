@@ -5,9 +5,11 @@
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
+    "axios": "^1.2.0",
     "bootstrap": "^5.2.3",
     "eslint-plugin-jest-dom": "^4.0.3",
     "eslint-plugin-testing-library": "^5.9.1",
+    "msw": "^0.49.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.6.0",
     "react-dom": "^18.2.0",
@@ -34,7 +36,11 @@
   },
   "devDependencies": {
     "@testing-library/dom": "^8.19.0",
-    "@testing-library/user-event": "^14.4.3",
-    "msw": "^0.49.1"
+    "@testing-library/user-event": "^14.4.3"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(axios|react-day-picker)/)"
+    ]
   }
 }
