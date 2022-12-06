@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { pricePerOption } from '../constants'
 
 const OrderDetailContext = React.createContext({
-  totalPrice: { scoop: 0, topping: 0 },
+  totalPrice: { scoop: 0, topping: 0, grandTotal: 0 },
   handleResetOrder: () => {},
   handleUpdateOrder: () => {},
 })
@@ -30,6 +30,9 @@ export const OrderDetailProvider = ({ children }) => {
   const totalPrice = {
     scoops: handleCalculateTotalPrice({ prodType: 'scoops' }),
     toppings: handleCalculateTotalPrice({ prodType: 'toppings' }),
+    get grandTotal() {
+      return this.scoops + this.toppings
+    },
   }
 
   return (
