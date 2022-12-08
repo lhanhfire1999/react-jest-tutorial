@@ -1,7 +1,16 @@
 import React from 'react'
 
+import ProductsOfOption from './ProductsOfOption'
+import SummaryForm from './SummaryForm'
+
 const OrderSummary = () => {
-  return <div>OrderSummary</div>
+  return (
+    <>
+      <ProductsOfOption optionType="scoops" />
+      <ProductsOfOption optionType="toppings" />
+      <SummaryForm />
+    </>
+  )
 }
 
 export default OrderSummary

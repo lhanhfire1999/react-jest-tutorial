@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import Row from 'react-bootstrap/Row'
-import { useOrderDetail } from '../../contexts/OrderDetailContext'
+import { useOrderDetail } from '../../contexts/orderDetailContext'
 import AlertBanner from '../../src/AlertBanner'
 import { formatCurrency } from '../../utilities'
 import ScoopOption from './ScoopOption'

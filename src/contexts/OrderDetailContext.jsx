@@ -2,29 +2,34 @@ import React, { useContext, useState } from 'react'
 import { pricePerOption } from '../constants'
 
 const OrderDetailContext = React.createContext({
-  totalPrice: { scoop: 0, topping: 0, grandTotal: 0 },
+  totalPrice: { scoops: 0, toppings: 0, grandTotal: 0 },
   handleResetOrder: () => {},
-  handleUpdateOrder: () => {},
+  handleUpdateOrder: ({ prodType }) => {},
+  handleObjEntriesWithType: ({ prodType }) => {},
 })
 
 export const OrderDetailProvider = ({ children }) => {
-  const [order, setOrder] = useState({ scoops: {}, toppings: {} })
+  const [orderOption, setOrderOption] = useState({ scoops: {}, toppings: {} })
 
   const handleUpdateOrder = ({ prodName, prodQuantity, prodType }) => {
-    const newOrder = { ...order }
-    order[prodType][prodName] = prodQuantity
-    setOrder(newOrder)
+    const newOrder = { ...orderOption }
+    orderOption[prodType][prodName] = prodQuantity
+    setOrderOption(newOrder)
   }
 
   const handleResetOrder = () => {
-    setOrder({ scoops: {}, toppings: {} })
+    setOrderOption({ scoops: {}, toppings: {} })
   }
 
   const handleCalculateTotalPrice = ({ prodType }) => {
-    const amountOfProdType = Object.values(order[prodType])
+    const amountOfProdType = Object.values(orderOption[prodType])
     const totalCount = amountOfProdType.reduce((prev, curr) => prev + curr, 0)
 
     return totalCount * pricePerOption[prodType]
+  }
+
+  const handleObjEntriesWithType = ({ prodType }) => {
+    return Object.entries(orderOption[prodType])
   }
 
   const totalPrice = {
@@ -37,7 +42,12 @@ export const OrderDetailProvider = ({ children }) => {
 
   return (
     <OrderDetailContext.Provider
-      value={{ totalPrice, handleUpdateOrder, handleResetOrder }}
+      value={{
+        totalPrice,
+        handleUpdateOrder,
+        handleResetOrder,
+        handleObjEntriesWithType,
+      }}
     >
       {children}
     </OrderDetailContext.Provider>

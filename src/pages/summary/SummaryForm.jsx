@@ -3,9 +3,16 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Popover from 'react-bootstrap/Popover'
+import { useCurrentPhase } from '../../contexts/currentPhaseContext'
 
 export default function SummaryForm() {
   const [tcChecked, setTcChecked] = useState(false)
+  const { onSetCurrentPhase } = useCurrentPhase()
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    onSetCurrentPhase('COMPLETED')
+  }
 
   const popover = (
     <Popover id="popover-basic">
@@ -23,7 +30,7 @@ export default function SummaryForm() {
   )
 
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Form.Group controlId="terms-and-conditions">
         <Form.Check
           type="checkbox"
