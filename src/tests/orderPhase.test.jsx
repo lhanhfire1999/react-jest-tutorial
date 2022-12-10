@@ -100,3 +100,39 @@ test('overall for order phases with happy case', async () => {
   await screen.findByRole('spinbutton', { name: 'Vanilla' })
   await screen.findByRole('checkbox', { name: 'Cherries' })
 })
+
+test('Topping header is not on summary page when no toppings orders', async () => {
+  const user = userEvent.setup()
+  render(<App />)
+
+  //Add ice-cream scoops and toppings (***INPROGRESS PHASE***)
+  const vanillaInput = await screen.findByRole('spinbutton', {
+    name: 'Vanilla',
+  })
+  await user.clear(vanillaInput)
+  await user.type(vanillaInput, '1')
+
+  const chocolateInput = screen.getByRole('spinbutton', {
+    name: 'Chocolate',
+  })
+  await user.clear(chocolateInput)
+  await user.type(chocolateInput, '2')
+
+  // Find and click order button
+  const orderButton = screen.getByRole('button', {
+    name: /order ice cream/i,
+  })
+  await user.click(orderButton)
+
+  // Check summary subtotals
+  const summaryHeading = screen.getByRole('heading', { name: 'Order Summary' })
+  expect(summaryHeading).toBeInTheDocument()
+
+  const summaryScoop = screen.getByRole('heading', { name: 'Scoops: $6.00' })
+  expect(summaryScoop).toBeInTheDocument()
+
+  const summaryTopping = screen.queryByRole('heading', {
+    name: /toppings/i,
+  })
+  expect(summaryTopping).not.toBeInTheDocument()
+})

@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react'
 
-import userEvent from '@testing-library/user-event'
 import { rest } from 'msw'
 import { server } from '../../../mocks/server'
 import OrderConfirmation from '../OrderConfirmation'
