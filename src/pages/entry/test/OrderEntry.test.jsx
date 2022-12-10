@@ -16,10 +16,10 @@ test('handles error for scoop and topping routes', async () => {
 
   render(<OrderEntry />)
 
-  // await waitFor(async () => {
-  const alerts = await screen.findAllByRole('alert')
-  expect(alerts).toHaveLength(2)
-  // })
+  await waitFor(async () => {
+    const alerts = await screen.findAllByRole('alert')
+    expect(alerts).toHaveLength(2)
+  })
 })
 
 test('Enabled button when increase quantity the particular scoop to 1, and disabled button when decrease it to 0', async () => {

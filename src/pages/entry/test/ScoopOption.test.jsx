@@ -1,34 +1,26 @@
+import userEvent from '@testing-library/user-event'
 import { render, screen } from '../../../test-utils/test-library-utils'
-import Options from '../Options'
+import ScoopOption from '../ScoopOption'
 
-test('Display image for each scoop option from server', async () => {
-  render(<Options optionType="scoops" />)
+test('Validate the value scoops orders', async () => {
+  const user = userEvent.setup()
+  render(<ScoopOption />)
 
-  // When waiting for somethings to appear async, use 'await'  and 'findBy'
+  const vanillaInput = screen.getByRole('spinbutton')
 
-  const scoopImages = await screen.findAllByRole('img', { name: /scoop$/i })
+  await user.clear(vanillaInput)
+  await user.type(vanillaInput, '-1')
+  expect(vanillaInput).toHaveClass('is-invalid')
 
-  expect(scoopImages).toHaveLength(2)
+  await user.clear(vanillaInput)
+  await user.type(vanillaInput, '1.5')
+  expect(vanillaInput).toHaveClass('is-invalid')
 
-  // String and numbers use except(element).toBe()
-  // Array and object use except(element).toEqual()
-  // Confirm alt text of images
-  const altTexts = scoopImages.map((element) => element.alt)
-  expect(altTexts).toEqual(['Chocolate scoop', 'Vanilla scoop'])
-})
+  await user.clear(vanillaInput)
+  await user.type(vanillaInput, '11')
+  expect(vanillaInput).toHaveClass('is-invalid')
 
-test('Display image for each topping option from server', async () => {
-  render(<Options optionType="toppings" />)
-
-  const toppingImages = await screen.findAllByRole('img', { name: /topping$/i })
-
-  expect(toppingImages).toHaveLength(3)
-
-  const altTexts = toppingImages.map((item) => item.alt)
-
-  expect(altTexts).toEqual([
-    'Cherries topping',
-    'M&Ms topping',
-    'Hot fudge topping',
-  ])
+  await user.clear(vanillaInput)
+  await user.type(vanillaInput, '3')
+  expect(vanillaInput).not.toHaveClass('is-invalid')
 })
