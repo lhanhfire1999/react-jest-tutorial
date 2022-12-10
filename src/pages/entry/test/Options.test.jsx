@@ -34,7 +34,7 @@ test('Display image for each topping option from server', async () => {
   ])
 })
 
-test.only('Do not update subtotal when the quantity scoop is in-valid', async () => {
+test('Do not update subtotal when the quantity scoop is in-valid', async () => {
   const user = userEvent.setup()
   render(<Options optionType="scoops" />)
 
@@ -44,17 +44,6 @@ test.only('Do not update subtotal when the quantity scoop is in-valid', async ()
   await user.clear(chocolateInput)
   await user.type(chocolateInput, '-1')
 
-  await userEvent.clear(chocolateInput)
-  await userEvent.type(chocolateInput, '-1')
-
-  const scoopTotal = screen.getByText('Scoops total: $', { exact: false })
-  expect(scoopTotal).toHaveTextContent('0.00')
-
-  await user.clear(chocolateInput)
-  await user.type(chocolateInput, '1.5')
-  expect(scoopTotal).toHaveTextContent('0.00')
-
-  await user.clear(chocolateInput)
-  await user.type(chocolateInput, '11')
-  expect(scoopTotal).toHaveTextContent('0.00')
+  const scoopTotal = screen.getByText('Scoops total: $0.00')
+  expect(scoopTotal).toBeInTheDocument()
 })
