@@ -6,10 +6,7 @@ import { CurrentPhaseProvider } from './contexts/currentPhaseContext'
 import { OrderDetailProvider } from './contexts/orderDetailContext'
 import OrderEntry from './pages/entry/OrderEntry'
 import OrderSummary from './pages/summary/OrderSummary'
-
-const Confirm = () => {
-  return <h2>Your order created success</h2>
-}
+import OrderConfirmation from './pages/confirmation/OrderConfirmation'
 
 function App() {
   const [currentPhase, setCurrentPhase] = useState('INPROGRESS')
@@ -21,7 +18,7 @@ function App() {
       CurrentPhaseComponent = OrderSummary
       break
     case 'COMPLETED':
-      CurrentPhaseComponent = Confirm
+      CurrentPhaseComponent = OrderConfirmation
       break
     case 'INPROGRESS':
       CurrentPhaseComponent = OrderEntry
