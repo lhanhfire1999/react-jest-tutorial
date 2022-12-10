@@ -10,21 +10,23 @@ export default function ScoopOptions({ name, imagePath }) {
   const handleChange = (e) => {
     const currentValue = parseFloat(e.target.value)
 
-    const isValueValid =
+    const isValidValue =
       0 <= currentValue &&
       currentValue <= 10 &&
       Math.floor(currentValue) === currentValue
 
     setIsValid(() => {
-      if (isValueValid) return true
+      if (isValidValue) return true
       return false
     })
 
-    handleUpdateOrder({
-      prodName: name,
-      prodQuantity: isValueValid ? parseInt(e.target.value) : 0,
-      prodType: 'scoops',
-    })
+    if (isValidValue) {
+      handleUpdateOrder({
+        prodName: name,
+        prodQuantity: currentValue,
+        prodType: 'scoops',
+      })
+    }
   }
 
   return (
